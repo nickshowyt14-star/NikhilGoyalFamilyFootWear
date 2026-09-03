@@ -34,7 +34,7 @@ export function About() {
       <div className="container-x">
         <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-14">
           {/* asymmetric photo composition */}
-          <div className="relative lg:col-span-7">
+          <div className="relative lg:col-span-5">
             <Reveal y={44}>
               <div className="relative">
                 {/* offset plate breaks the photo out of a plain rectangle */}
@@ -42,13 +42,13 @@ export function About() {
                   aria-hidden
                   className="absolute -left-3 -top-4 h-full w-full rounded-[26px] bg-brand/12 sm:-left-5 sm:-top-6"
                 />
-                <div className="relative aspect-4/3 overflow-hidden rounded-[26px] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)]">
+                <div className="relative aspect-3/4 overflow-hidden rounded-[26px] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)]">
                   <motion.div style={{ y: photoY }} className="absolute inset-0">
                     <Image
                       src={img.storefront}
                       alt={`The ${site.legalName} storefront in ${site.locality}`}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 56vw"
+                      sizes="(max-width: 1024px) 100vw, 42vw"
                       className="scale-110 object-cover"
                     />
                   </motion.div>
@@ -72,7 +72,7 @@ export function About() {
           </div>
 
           {/* copy */}
-          <div className="lg:col-span-5 lg:pt-6">
+          <div className="lg:col-span-6 lg:col-start-7 lg:pt-6">
             <Reveal>
               <span className="eyebrow text-brand">About the store</span>
             </Reveal>

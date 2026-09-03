@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "Family Footwear Loni",
     "sports shoes Loni",
     "school shoes Ghaziabad",
-    "Sparx Campus Relaxo Loni",
+    "Sparx Campus Relaxo Abros Loni",
     "sportswear Loni Ghaziabad",
     "multi brand shoe showroom Loni",
   ],

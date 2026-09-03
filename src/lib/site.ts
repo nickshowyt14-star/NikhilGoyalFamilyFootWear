@@ -87,15 +87,17 @@ export const nav = [
 ] as const;
 
 /**
- * Brands stocked. The six below were supplied by the store owner; `Campus`
- * additionally appears on the physical shop board in the storefront photograph.
+ * Brands stocked. Every entry below is legible on the shop's own signage in
+ * `source-photos/shop.png`: Sparx, Asian, Campus, Relaxo, Paragon and Jockey run
+ * along the brand strip under the main board, and Abros is on the top fascia.
  * Do not add a brand here unless the store confirms it — see README.
  */
 export const brands = [
-  { name: "Sparx", confirmedOnBoard: false },
-  { name: "Asian", confirmedOnBoard: false },
+  { name: "Abros", confirmedOnBoard: true },
+  { name: "Sparx", confirmedOnBoard: true },
+  { name: "Asian", confirmedOnBoard: true },
   { name: "Campus", confirmedOnBoard: true },
-  { name: "Paragon", confirmedOnBoard: false },
-  { name: "Relaxo", confirmedOnBoard: false },
-  { name: "Jockey", confirmedOnBoard: false },
+  { name: "Relaxo", confirmedOnBoard: true },
+  { name: "Paragon", confirmedOnBoard: true },
+  { name: "Jockey", confirmedOnBoard: true },
 ] as const;

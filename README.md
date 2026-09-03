@@ -16,54 +16,49 @@ npm run build && npm start
 
 ---
 
-## ⚠️ Two things to do before this goes live
+## Store assets
 
-### 1. Add the phone number
+Both store photographs and the phone number are in place.
 
-No phone number was supplied, and inventing one risks publishing a stranger's
-real number — so it is a placeholder. Open **`src/lib/site.ts`** and replace:
+| What | Where | Source |
+| --- | --- | --- |
+| Phone | `src/lib/site.ts` → `phone` | +91 99718 44701 |
+| Shopfront | `public/images/storefront.jpg` | `source-photos/shop.png` |
+| Founder cut-out | `public/images/founder.png` | `source-photos/nikhil.png` |
 
-```ts
-const phone = PHONE_PLACEHOLDER;      // "91XXXXXXXXXX"
-```
+Original photographs are kept in `source-photos/` so the derived images can be
+regenerated at any time.
 
-with the store's real number — digits only, including the country code:
+### Regenerating them
 
-```ts
-const phone = "919876543210";
-```
-
-That single edit switches on every **Call** and **WhatsApp** link across the
-header, mobile menu, sticky mobile bar, Visit Store section and footer, and adds
-`telephone` to the LocalBusiness structured data. While it is unset, `npm run
-dev` shows a reminder in the Visit Store section (development only — it never
-renders in production).
-
-### 2. Drop in the two real photographs
-
-`public/images/storefront.jpg` and `public/images/founder.png` are currently
-labelled placeholder graphics. Replace them with the real photos:
+The shopfront just needs resizing and compressing:
 
 ```bash
-python scripts/prepare-images.py --storefront path/to/shop.jpg --founder path/to/nikhil.jpg
+python scripts/prepare-images.py --storefront source-photos/shop.png
 ```
 
-The script resizes the storefront photo and **removes the background from the
-founder photo**, saving a transparent PNG so the figure overlaps the section
-artwork the way the layout intends. It needs:
+The founder photo needs its own script — **do not** use `prepare-images.py` for it:
+
+```bash
+python scripts/founder-cutout.py
+```
+
+Why: he is holding a board at a race, in front of a sponsor wall. Plain
+background removal either keeps the board along with strips of the wall beneath
+it, or drops the board entirely. `founder-cutout.py` composes the mask instead —
+`person ∪ board` — isolating the board by colour (it sits at R-G ≈ 94, G-B ≈ 0,
+well clear of skin at R-G 32-50, G-B 9-27) and rebuilding it with a row-wise
+convex fill so its lettering and artwork survive. Anything that is neither
+person nor board is sponsor wall and is discarded.
+
+If the founder photo is ever replaced, that colour rule and the row-fill
+assumption (the sign being a convex quadrilateral) will need revisiting.
+
+Both scripts need:
 
 ```bash
 pip install rembg onnxruntime pillow scipy
 ```
-
-The first run downloads the ~176 MB u2net model; later runs are fast.
-
-You can also just overwrite the two files by hand, keeping the same names —
-`storefront.jpg` (landscape, 1600px+ wide) and `founder.png` (background already
-removed, portrait). The founder slot uses `object-contain`, so any portrait crop
-sits correctly without touching the layout.
-
----
 
 ## Replacing the product photography
 
@@ -109,10 +104,10 @@ Almost everything is data, not markup:
 
 ### Brands
 
-The brand list lives in `site.ts`. It currently holds the six brands supplied by
-the store: Sparx, Asian, Campus, Paragon, Relaxo and Jockey. `Campus` is
-additionally marked `confirmedOnBoard: true` because it is legible on the shop
-signage in the storefront photograph.
+The brand list lives in `site.ts`: Abros, Sparx, Asian, Campus, Relaxo, Paragon
+and Jockey. Every one is legible on the shop's own signage in
+`source-photos/shop.png` — six run along the brand strip beneath the main board,
+and Abros is on the top fascia — so all are marked `confirmedOnBoard: true`.
 
 Only add a brand here once the store confirms it is stocked — the marquee is
 presented as a factual claim to customers.
