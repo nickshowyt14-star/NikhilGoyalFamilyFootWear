@@ -37,6 +37,16 @@ export function Footer() {
               {site.address.lines.map((line) => (
                 <p key={line}>{line}</p>
               ))}
+              {site.hasPhone && (
+                <p className="pt-2">
+                  <a
+                    href={site.telHref}
+                    className="font-semibold text-white/75 transition-colors hover:text-brand-bright"
+                  >
+                    {site.phoneDisplay}
+                  </a>
+                </p>
+              )}
             </address>
           </div>
 

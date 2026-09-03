@@ -40,6 +40,20 @@ export function VisitStore() {
                     <p key={line}>{line}</p>
                   ))}
                 </div>
+
+                {hasPhone && (
+                  <a
+                    href={site.telHref}
+                    className="group mt-6 inline-flex items-center gap-3 text-white transition-colors hover:text-brand-bright"
+                  >
+                    <span className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition-colors duration-300 group-hover:border-brand group-hover:bg-brand group-hover:text-white">
+                      <Phone className="h-4 w-4" />
+                    </span>
+                    <span className="display text-[1.35rem] tracking-tight">
+                      {site.phoneDisplay}
+                    </span>
+                  </a>
+                )}
               </address>
             </Reveal>
 

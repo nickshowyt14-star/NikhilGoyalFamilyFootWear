@@ -28,7 +28,7 @@ export function Hero() {
     <section
       id="home"
       ref={ref}
-      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ink-deep pt-24 pb-20 text-white md:pt-28"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ink-deep pb-20 pt-[11.5rem] text-white sm:pt-[13rem] lg:pt-[16.5rem] xl:pt-[19rem] 2xl:pt-[20rem]"
     >
       {/* backdrop */}
       <motion.div style={{ y: bgY, scale: bgScale }} className="absolute inset-0 -z-20">

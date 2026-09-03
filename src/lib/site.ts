@@ -1,20 +1,21 @@
 /**
  * FAMILY FOOTWEAR — single source of truth for all business information.
  *
- * ─────────────────────────────────────────────────────────────────────────────
- *  ⚠  ACTION REQUIRED BEFORE GOING LIVE
- *  `phone` below is a PLACEHOLDER. No phone number was supplied for this store,
- *  and inventing one risks publishing a stranger's real number. Replace the
- *  value of `phone` with the store's actual number (digits only, with country
- *  code, e.g. "919876543210") and every Call / WhatsApp button on the site
- *  starts working immediately. Until then those buttons are hidden.
- * ─────────────────────────────────────────────────────────────────────────────
+ * `phone` drives every Call and WhatsApp link on the site plus the `telephone`
+ * field in the LocalBusiness structured data. Store it as digits only, with the
+ * country code and no spaces or symbols, so it is valid in both a `tel:` URI and
+ * a wa.me link. Displayed separately as `phoneDisplay`.
  */
 
-/** Sentinel meaning "not yet supplied". Replace with the real number. */
+/** Sentinel meaning "not yet supplied" — kept so `hasPhone` stays meaningful. */
 export const PHONE_PLACEHOLDER = "91XXXXXXXXXX";
 
-const phone = PHONE_PLACEHOLDER;
+/**
+ * +91 99718 44701
+ * Typed as `string` rather than a literal so the placeholder guard below stays
+ * a real runtime check instead of a comparison TypeScript can rule out.
+ */
+const phone: string = "919971844701";
 
 /** True only once a real number has been filled in above. */
 export const hasPhone = phone !== PHONE_PLACEHOLDER && /^\d{10,15}$/.test(phone);
@@ -49,6 +50,8 @@ export const site = {
 
   phone,
   hasPhone,
+  /** Human-readable form for on-page display. */
+  phoneDisplay: "+91 99718 44701",
 
   /** tel: link — only render when `hasPhone` is true. */
   telHref: `tel:+${phone}`,
