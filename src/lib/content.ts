@@ -146,6 +146,18 @@ export const promises = [
   },
 ] as const;
 
+/**
+ * Nikhil's own athletic background, supplied by the store. These read as
+ * factual claims about a real person — only edit them with his say-so.
+ */
+export const founderCredentials = [
+  { label: "Fitness Freak", icon: "flame" },
+  { label: "Hybrid Athlete", icon: "dumbbell" },
+  { label: "Hyrox Winner", icon: "trophy" },
+  { label: "Marathon Runner", icon: "stopwatch" },
+  { label: "KL Rahul Paglu", icon: "heart" },
+] as const;
+
 export const sportswearItems = [
   "Training",
   "Running",

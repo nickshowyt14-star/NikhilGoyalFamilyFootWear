@@ -47,7 +47,7 @@ export function Button({
   // stylesheet order, not class order, so the winner is unpredictable. To hide a
   // button responsively, wrap it in an element that carries the display classes.
   const cls = [
-    "relative inline-flex items-center justify-center overflow-hidden rounded-full",
+    "relative inline-flex items-center justify-center overflow-hidden whitespace-nowrap rounded-full",
     "font-semibold uppercase tracking-[0.14em] transition-all duration-300 ease-out",
     "active:scale-[0.97] will-change-transform",
     sizes[size],

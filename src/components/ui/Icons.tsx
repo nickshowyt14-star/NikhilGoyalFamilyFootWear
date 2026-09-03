@@ -77,6 +77,38 @@ export const Activity = (p: IconProps) => (
   </svg>
 );
 
+export const Flame = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5Z" />
+  </svg>
+);
+
+export const Dumbbell = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M4 9v6M7.5 6.5v11M16.5 6.5v11M20 9v6M7.5 12h9" />
+  </svg>
+);
+
+export const Trophy = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M6 9H4.6a2.6 2.6 0 0 1 0-5.2H6M18 9h1.4a2.6 2.6 0 0 0 0-5.2H18M4.5 22h15" />
+    <path d="M18 2.8H6V9a6 6 0 0 0 12 0V2.8ZM10 14.7V17c0 .8-.9 1.2-1.6 1.6-.9.6-1.4 1.9-1.4 3.4M14 14.7V17c0 .8.9 1.2 1.6 1.6.9.6 1.4 1.9 1.4 3.4" />
+  </svg>
+);
+
+export const Stopwatch = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="14" r="8" />
+    <path d="M12 10.5V14l2.2 2.2M9.5 2h5M18.8 6.2l1.4-1.4" />
+  </svg>
+);
+
+export const Heart = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8Z" />
+  </svg>
+);
+
 export const Instagram = (p: IconProps) => (
   <svg {...base} {...p}>
     <rect x="3" y="3" width="18" height="18" rx="5" />

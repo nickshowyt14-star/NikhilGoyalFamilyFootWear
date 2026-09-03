@@ -16,16 +16,22 @@ export function Wordmark({
   className?: string;
 }) {
   return (
-    <a href="#home" className={`group flex items-center gap-3 ${className}`}>
+    <a
+      href="#home"
+      className={`group flex items-center gap-3 sm:gap-3.5 ${className}`}
+      aria-label={`${site.name} — ${site.locality}, home`}
+    >
       <span
         aria-hidden
-        className="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] bg-brand text-white shadow-[0_6px_18px_-6px_rgba(215,25,32,0.8)] transition-transform duration-500 ease-out group-hover:rotate-[-6deg]"
+        className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand text-white shadow-[0_8px_22px_-8px_rgba(215,25,32,0.85)] transition-transform duration-500 ease-out group-hover:rotate-[-6deg] sm:h-12 sm:w-12"
       >
-        <span className="display text-[1.05rem] leading-none">FF</span>
+        <span className="display text-[1.15rem] leading-none sm:text-[1.4rem]">
+          FF
+        </span>
       </span>
       <span className="flex flex-col leading-none">
         <span
-          className={`display whitespace-nowrap text-[1.02rem] leading-none sm:text-[1.15rem] ${
+          className={`display whitespace-nowrap text-[1.25rem] leading-none sm:text-[1.55rem] xl:text-[1.65rem] ${
             dark ? "text-white" : "text-ink"
           }`}
         >
@@ -33,8 +39,8 @@ export function Wordmark({
         </span>
         {/* Locality sits directly beneath the name, as a smaller subtitle. */}
         <span
-          className={`eyebrow mt-[5px] whitespace-nowrap text-[0.56rem] sm:text-[0.6rem] ${
-            dark ? "text-white/55" : "text-smoke"
+          className={`eyebrow mt-1.5 whitespace-nowrap text-[0.6rem] sm:text-[0.68rem] ${
+            dark ? "text-white/60" : "text-smoke"
           }`}
         >
           {site.locality}
@@ -90,10 +96,10 @@ export function Header() {
             : "border-b border-transparent bg-transparent"
         }`}
       >
-        <div className="container-x flex h-20 items-center justify-between gap-6 md:h-24">
+        <div className="container-x flex h-24 items-center justify-between gap-4 md:h-28 2xl:gap-6">
           <Wordmark dark={!onLight || open} />
 
-          <nav aria-label="Primary" className="hidden lg:block">
+          <nav aria-label="Primary" className="hidden xl:block">
             <ul className="flex items-center gap-1">
               {nav.map((item) => {
                 const isActive = active === item.href.slice(1);
@@ -102,7 +108,7 @@ export function Header() {
                     <a
                       href={item.href}
                       aria-current={isActive ? "true" : undefined}
-                      className={`relative rounded-full px-3.5 py-2 text-[0.78rem] font-medium transition-colors duration-300 xl:px-4 ${
+                      className={`relative whitespace-nowrap rounded-full px-2.5 py-2 text-[0.78rem] font-medium transition-colors duration-300 2xl:px-4 ${
                         scrolled
                           ? isActive
                             ? "text-brand"
@@ -116,7 +122,7 @@ export function Header() {
                       {isActive && (
                         <motion.span
                           layoutId="nav-dot"
-                          className="absolute inset-x-3.5 -bottom-0.5 h-[2px] rounded-full bg-brand"
+                          className="absolute inset-x-2.5 -bottom-0.5 h-[2px] rounded-full bg-brand 2xl:inset-x-4"
                           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         />
                       )}
@@ -137,8 +143,8 @@ export function Header() {
                 variant={scrolled ? "outline" : "outlineLight"}
               >
                 <MapPin className="h-3.5 w-3.5" />
-                <span className="hidden lg:inline">Get Directions</span>
-                <span className="lg:hidden">Directions</span>
+                <span className="hidden 2xl:inline">Get Directions</span>
+                <span className="2xl:hidden">Directions</span>
               </Button>
             </span>
 
@@ -162,7 +168,7 @@ export function Header() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className={`relative z-50 grid h-11 w-11 place-items-center rounded-full border transition-colors duration-300 lg:hidden ${
+              className={`relative z-50 grid h-11 w-11 place-items-center rounded-full border transition-colors duration-300 xl:hidden ${
                 onLight && !open
                   ? "border-ink/15 text-ink"
                   : "border-white/30 text-white"

@@ -33,7 +33,7 @@ export function MobileNav({
       {open && (
         <motion.div
           id="mobile-menu"
-          className="fixed inset-0 z-40 flex flex-col bg-ink-deep text-white lg:hidden"
+          className="fixed inset-0 z-40 flex flex-col bg-ink-deep text-white xl:hidden"
           initial={{ clipPath: "inset(0 0 100% 0)" }}
           animate={{ clipPath: "inset(0 0 0% 0)" }}
           exit={{ clipPath: "inset(0 0 100% 0)" }}

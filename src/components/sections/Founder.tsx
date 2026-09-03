@@ -4,7 +4,23 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { img } from "@/lib/images";
-import { Reveal, RevealWords } from "@/components/ui/Reveal";
+import { founderCredentials } from "@/lib/content";
+import { Reveal, RevealWords, Stagger, StaggerItem } from "@/components/ui/Reveal";
+import {
+  Dumbbell,
+  Flame,
+  Heart,
+  Stopwatch,
+  Trophy,
+} from "@/components/ui/Icons";
+
+const CRED_ICONS = {
+  flame: Flame,
+  dumbbell: Dumbbell,
+  trophy: Trophy,
+  stopwatch: Stopwatch,
+  heart: Heart,
+} as const;
 
 export function Founder() {
   const ref = useRef<HTMLElement>(null);
@@ -53,8 +69,35 @@ export function Founder() {
                   with a more modern approach to footwear, sports and lifestyle
                   retail.
                 </p>
+                <p>
+                  That interest is not only professional. The sports side of the
+                  store is picked by someone who trains seriously himself — which
+                  is a useful thing in whoever is helping you choose a pair.
+                </p>
               </div>
             </Reveal>
+
+            {/* athletic credentials */}
+            <Reveal delay={0.2}>
+              <p className="eyebrow mt-10 text-white/40">Off the shop floor</p>
+            </Reveal>
+            <Stagger className="mt-5 flex flex-wrap gap-2.5">
+              {founderCredentials.map((c) => {
+                const Icon = CRED_ICONS[c.icon];
+                return (
+                  <StaggerItem key={c.label}>
+                    <span className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.05] py-2.5 pl-3 pr-4 transition-colors duration-400 hover:border-brand hover:bg-brand/12">
+                      <span className="grid h-7 w-7 place-items-center rounded-full bg-white/8 text-brand-bright transition-colors duration-400 group-hover:bg-brand group-hover:text-white">
+                        <Icon className="h-[15px] w-[15px]" />
+                      </span>
+                      <span className="text-[0.82rem] font-semibold tracking-[0.02em] text-white/88">
+                        {c.label}
+                      </span>
+                    </span>
+                  </StaggerItem>
+                );
+              })}
+            </Stagger>
 
             <Reveal delay={0.25}>
               <figure className="mt-10 border-l-2 border-brand pl-6">
