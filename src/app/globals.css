@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   FAMILY FOOTWEAR — design tokens
+   Palette derived from the physical storefront: bold red signage,
+   near-black shopfront, white lettering, warm grey street tones.
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-ink: #111111;
+  --color-ink-deep: #0a0a0a;
+  --color-ink-soft: #1c1c1c;
+  --color-smoke: #6b6b6b;
+  --color-mist: #f4f4f4;
+  --color-sand: #faf9f7;
+  --color-paper: #ffffff;
+
+  --color-brand: #d71920;
+  --color-brand-dark: #a8121a;
+  --color-brand-bright: #ff2e37;
+
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── base ─────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  /* keeps anchored sections clear of the sticky header */
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+/* Visible, on-brand keyboard focus everywhere. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── layout helpers ───────────────────────────────────────── */
+@utility container-x {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) {
+    padding-inline: 2.5rem;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 3.5rem;
+  }
+}
+
+/* ── typography ───────────────────────────────────────────── */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.86;
+  text-wrap: balance;
+}
+
+/* Hero: scales to 110px on wide screens, staying legible on small phones. */
+@utility text-hero {
+  font-size: clamp(2.9rem, 7.6vw, 6.9rem);
+}
+
+/* Section headings: 36px on phones up to 64px on desktop. */
+@utility text-section {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+}
+
+/* Oversized editorial type. Capped so the longest line still fits 1440px. */
+@utility text-mega {
+  font-size: clamp(2.6rem, 10vw, 8.5rem);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ── decorative ───────────────────────────────────────────── */
+@utility hairline {
+  border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+
+/* Outlined display text used behind the founder + mega headings.
+   The stroke colour is explicit: deriving it from `currentColor` fails because
+   this rule sets `color: transparent` on the same element. Both usages sit on
+   dark panels, so the default is a soft white; override --outline-color to reuse
+   it elsewhere. Never pair with a `text-*` colour utility, which would win. */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--outline-color, rgba(255, 255, 255, 0.42));
+}
+
+/* Soft page-wide grain keeps large flat areas from banding. */
+@utility grain {
+  position: relative;
+}
+@utility grain-layer {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── marquee ──────────────────────────────────────────────── */
+@keyframes marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x var(--marquee-duration, 44s) linear infinite;
+  will-change: transform;
+}
+.marquee-track[data-reverse="true"] { animation-direction: reverse; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* Dim every sibling when one brand is hovered. */
+.brand-row:hover .brand-item { opacity: 0.32; filter: grayscale(1); }
+.brand-row .brand-item:hover { opacity: 1; filter: none; transform: translateY(-2px); }
+
+/* ── scroll cue ───────────────────────────────────────────── */
+@keyframes cue {
+  0%   { transform: translateY(0);    opacity: 0; }
+  35%  { opacity: 1; }
+  100% { transform: translateY(14px); opacity: 0; }
+}
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 3px;
+  height: 8px;
+  margin-left: -1.5px;
+  border-radius: 99px;
+  background: currentColor;
+  animation: cue 1.9s var(--ease-out-expo) infinite;
+}
+
+/* ── shine sweep on primary buttons ───────────────────────── */
+@keyframes sheen {
+  to { transform: translateX(220%) skewX(-18deg); }
+}
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+  transform: translateX(-160%) skewX(-18deg);
+}
+.btn-sheen:hover::after { animation: sheen 0.85s var(--ease-out-expo); }
+
+/* ── accessibility ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee-track { animation: none !important; }
+}
